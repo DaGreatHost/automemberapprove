@@ -1,4 +1,3 @@
-
 import asyncio, json, os
 from pyrogram import Client, filters
 from pyrogram.types import ChatJoinRequest, Message
@@ -89,20 +88,29 @@ async def add_channel(client, message: Message):
 async def view_channels(client, message: Message):
     if not delay_config:
         return await message.reply("❌ No channels configured yet.")
-    reply = "📡 Tracked Channels:
-"
+    reply = "📡 Tracked Channels:\n"
     for ch, d in delay_config.items():
-        reply += f"{ch} → {d} minute(s)
-"
+        reply += f"{ch} → {d} minute(s)\n"
     await message.reply(reply)
 
 @app.on_message(filters.command("help"))
 async def help_cmd(client, message: Message):
-    await message.reply("This bot auto-approves join requests.
+    await message.reply(
+        "🤖 This bot auto-approves join requests to your Telegram channels.\n\n"
+        "🛠 Commands:\n"
+        "/setwelcome <msg> – Set DM welcome message\n"
+        "/viewchannels – View tracked channels\n"
+        "/addchannel <id> <delay> – Add or update delay config\n"
+        "/help – Show this message\n"
+        "/totalusers – (creator only)"
+    )
 
-Commands:
-/setwelcome <msg> – Set DM welcome message
-/viewchannels – View tracked channels
-/help – Show this message")
+@app.on_message(filters.command("start"))
+async def start_cmd(client, message: Message):
+    await message.reply(
+        "👋 Hello! This bot will auto-approve join requests to your VIP channels if you're invited.\n\n"
+        "⚙️ Built by @CodeHustlePH",
+        disable_web_page_preview=True
+    )
 
 app.run()
