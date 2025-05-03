@@ -96,13 +96,23 @@ async def view_channels(client, message: Message):
 @app.on_message(filters.command("help"))
 async def help_cmd(client, message: Message):
     await message.reply(
-        "🤖 This bot auto-approves join requests to your Telegram channels.\n\n"
-        "🛠 Commands:\n"
-        "/setwelcome <msg> – Set DM welcome message\n"
-        "/viewchannels – View tracked channels\n"
-        "/addchannel <id> <delay> – Add or update delay config\n"
-        "/help – Show this message\n"
-        "/totalusers – (creator only)"
+        "🤖 *Auto-Accept Bot Guide*\n\n"
+        "This bot will auto-approve join requests to your Telegram channels and send them a welcome message (optional).\n\n"
+        "🔧 *Commands:*\n\n"
+        "📌 `/setwelcome <message>`\n"
+        "Set a welcome DM to be sent to users after approval.\n"
+        "📝 Example: `/setwelcome Welcome to our VIP group! 😘`\n\n"
+        "📌 `/addchannel <channel_id> <delay>`\n"
+        "Track a channel and set delay (in minutes) before approving users.\n"
+        "📝 Example: `/addchannel -1001234567890 2`\n\n"
+        "📌 `/viewchannels`\n"
+        "Show all added channels with their delay setting.\n\n"
+        "📌 `/totalusers`\n"
+        "(Creator only) Show number of approved users.\n\n"
+        "📌 `/help`\n"
+        "Display this help menu.\n\n"
+        "⚙️ *Built by* @CodeHustlePH",
+        disable_web_page_preview=True
     )
 
 @app.on_message(filters.command("start"))
